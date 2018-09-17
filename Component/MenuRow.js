@@ -7,9 +7,12 @@ import {
   Image,
 } from 'react-native';
 
+
 export default class MenuRow extends React.Component{//qui setto on press per gestire details oltre al render
     render(){
         return(
+          <TouchableHighlight onPress={()=>{this.props.navigation.navigate('Details')}}>
+
             <View style={styles.containerLista}>
             <Image source={{uri:this.props.data.image}} style={styles.imgLista}/>
               <View style={styles.textContainer}>
@@ -19,6 +22,7 @@ export default class MenuRow extends React.Component{//qui setto on press per ge
             </View>
   
           </View>
+          </TouchableHighlight>
         )
     }
 }
