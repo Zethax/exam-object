@@ -2,6 +2,8 @@ import React from 'react';
 import {StyleSheet, Text, FlatList, Button, View} from 'react-native';
 //import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 import { Constants } from 'expo';
+import { SearchBar } from 'react-native-elements'
+
 
 import MenuRow from './MenuRow'
 
@@ -20,19 +22,28 @@ export default class ListaScreen extends React.Component{
         })
     }
 
-    //TODO: create bar search
-    
+
+
+    //get array
     getData(){
         if(this.state.searchText=='')//nessuna modifica nella searchBar
             return this.state.dataSource;
 
-            //else applica il filtraggio
+        else{
+        let key = this.state.searchText.toLowerCase();
+        return this.state.dataSource.filter(item => {
+        let name = item.name.toLowerCase();
+        let category = item.category.toLowerCase();
+        let info=item.info.toLowerCase(); 
+        return (name.search(key) !== -1 || info.search(key)!==-1 || category.search(key) !== -1);
+        });
+    }
     }
 
     //creo questo comp apparte per poter gestire onPress a details
     renderRow=({item})=>{
         return (
-        <MenuRow data={item} />
+        <MenuRow data={item} navigation={this.props.navigation}/>
     )
     }
 
@@ -41,10 +52,18 @@ export default class ListaScreen extends React.Component{
             <View style={styles.container}>
                 <Text style={styles.paragraph}> Menù </Text>
 
-                <FlatList 
-                    data={this.getData()}
-                    renderItem={this.renderRow}
-                    keyExtractor={item => item.id}/>
+    <View style={{width:350}}>
+        <SearchBar
+          lightTheme
+          onChangeText={(text)=>{this.setState({searchText:text})}} 
+          onClear={()=>{this.setState({searchText:''})}}
+          placeholder='Cerca...' />
+    </View>
+
+        <FlatList 
+            data={this.getData()}
+            renderItem={this.renderRow}
+            keyExtractor={item => item.id}/>
 
 
             </View>
