@@ -11,7 +11,7 @@ import {
 export default class MenuRow extends React.Component{//qui setto on press per gestire details oltre al render
     render(){
         return(
-          <TouchableHighlight onPress={()=>{this.props.navigation.navigate('Details')}}>
+          <TouchableHighlight onPress={()=>{this.props.navigation.navigate('Details',{currentItem:this.props.data})}}>
 
             <View style={styles.containerLista}>
             <Image source={{uri:this.props.data.image}} style={styles.imgLista}/>
