@@ -1,9 +1,12 @@
 import React from 'react';
 import {StyleSheet, StatusBar} from 'react-native';
 import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
+import { SearchBar } from 'react-native-elements'
+
 
 import ListaScreen from './component/ListaScreen';
 import CarrelloScreen from './component/CarrelloScreen';
+import DetailScreen from './component/DetailScreen'
 
 StatusBar.setHidden(true);
 
@@ -15,7 +18,10 @@ const Navigazione= createStackNavigator({
       title:'Menù'
     }
   },
-
+  Details:{
+    screen: DetailScreen
+  },
+ 
   //add new stack navigator
 })
 
