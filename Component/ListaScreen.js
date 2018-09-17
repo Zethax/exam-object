@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, FlatList, Button, View} from 'react-native';
+import {StyleSheet, Text, FlatList, Button, View, Alert} from 'react-native';
 //import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 import { Constants } from 'expo';
 import { SearchBar } from 'react-native-elements'
@@ -10,6 +10,13 @@ import MenuRow from './MenuRow'
 
 export default class ListaScreen extends React.Component{
 
+    static navigationOptions={
+        headerTitle:'Menù',
+        headerRight:(
+            <Button title='Filtra' onPress={()=>{Alert.alert('pressed')}} />
+        )
+   
+    }
     //default state
     state={dataSource:[], searchText:''}
 
@@ -50,8 +57,8 @@ export default class ListaScreen extends React.Component{
     render(){
         return (
             <View style={styles.container}>
-                <Text style={styles.paragraph}> Menù </Text>
 
+             
     <View style={{width:350}}>
         <SearchBar
           lightTheme
